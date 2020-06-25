@@ -4,7 +4,7 @@ $(document).ready (function () {
     var itemKey = today;
     var key = "af2763d6de673b2f09f9cfea0b035d97";
     var text = city;
-    var today = moment().format("Do MMMM YYYY, h:mm:ss a");
+    var today = moment().format("Do MMMM YYYY, h:mm");
     
     $.when(
         $("#cityBtn").click(function(event) {
@@ -19,9 +19,9 @@ $(document).ready (function () {
             lon: forecastData.city.coord.lon,
         },
 
-    $.when ($.ajax("xhttp://api.openweathermap.org/data/2.5/weather?q={city name}&appid="), 
-    $.ajax("xhttp://api.openweathermap.org/data/2.5/forecast?q={city name}&appid=)"),
-    $.ajax("xhttp://api.openweathermap.org/data/2.5/uvi?appid=${apiKey1}&lat=${lat}&lon=${lon}"))
+    $.when ($.ajax("xhttp://api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}"), 
+    $.ajax("xhttp://api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}"),
+    $.ajax("xhttp://api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}"))
 
     .then(function (resp1, resp2, resp3){
 
@@ -44,7 +44,7 @@ $(document).ready (function () {
         wf1 += "<b> Today "  + dayName +  "</b>: "
         wf1 += (val.main.temp).toFixed(0); + "&degC" // Temperature
         wf1 += "<span> " + val.weather[0].description + "</span>"; // Description
-        wf1 += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
+        wf1 += "<img src='xhttp://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
         wf1 += "</p>" // Closing paragraph tag'
         },
 
