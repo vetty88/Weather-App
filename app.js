@@ -21,9 +21,9 @@ script="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
             lon: forecastData.city.coord.lon,
         },
 
-    $.when ($.ajax("xhttp://api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}"), 
-    $.ajax("xhttp://api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}"),
-    $.ajax("xhttp://api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}"))
+    $.when ($.ajax("http://api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}"), 
+    $.ajax("http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}"),
+    $.ajax("http://api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}"))
 
     .then(function (resp1, resp2, resp3){
 
