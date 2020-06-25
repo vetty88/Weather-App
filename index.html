@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Weather App</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+		
+	</head>
+
+	<body>
+					
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img src="images/logo.png" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">Your City Weather</h1>
+								<small class="site-description">Whether for Work or Pleasure - find Your City Weather!</small>
+							</div>
+					</a>
+
+				
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
+						</ul> 
+					</div> 
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> 
+
+			<div class="hero" data-bg-image="images/banner.png">
+				<div class="container">
+					<form action="#" class="city-search" id= "city-search">
+						<input type="text" id="city-name" placeholder="Find your City...">
+						<input type="submit" value="city-search" id="cityBtn">
+					</form>
+
+					<h2><div class="your-city" id="your-city"></div></h2>
+
+				</div>
+			</div>
+
+			<div class="fullwidth-block" data-bg-color="#262936"></div>
+			<div class="row">
+				<div class="col-md-8" id = wf1> </div>
+			<div class="row">
+				<div class="col-md-4" id = wf3> </div>
+			<div class="row">
+				<div class="col-md-12" id = wf2> </div>
+
+			
+			<div class="forecast-table">
+				<div class="container">
+					<div class="forecast-container">
+					<p>
+						<div class="today-forecast">
+						</div>
+						<div class="forecast-header" id = "0">
+						
+							
+						</div>
+
+						<div id = "items">
+
+						</div>
+					
+					</p>
+					
+
+				<div class="fullwidth-block" data-bg-color="#262936">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="news">
+									<div class="date">06.10</div>
+									<h3><a href="#">Doloremque laudantium totam sequi </a></h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo saepe assumenda dolorem modi, expedita voluptatum ducimus necessitatibus. Asperiores quod reprehenderit necessitatibus harum, mollitia, odit et consequatur maxime nisi amet doloremque.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="news">
+									<div class="date">06.10</div>
+									<h3><a href="#">Doloremque laudantium totam sequi </a></h3>
+									<p>Nobis architecto consequatur ab, ea, eum autem aperiam accusantium placeat vitae facere explicabo temporibus minus distinctio cum optio quis, dignissimos eius aspernatur fuga. Praesentium totam, corrupti beatae amet expedita veritatis.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="news">
+									<div class="date">06.10</div>
+									<h3><a href="#">Doloremque laudantium totam sequi </a></h3>
+									<p>Enim impedit officiis placeat qui recusandae doloremque possimus, iusto blanditiis, quam optio delectus maiores. Possimus rerum, velit cum natus eos. Cumque pariatur beatae asperiores, esse libero quas ad dolorem. Voluptates.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="fullwidth-block">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<h2 class="section-title">Application features</h2>
+								<ul class="arrow-feature">
+									<li>
+										<h3>Natus error sit voluptatem accusantium</h3>
+										<p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto beatae vitae.</p>
+									</li>
+									<li>
+										
+										<h3>Natus error sit voluptatem accusantium</h3>
+										<p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto beatae vitae.</p>
+									</li>
+									<li>
+										<h3>Natus error sit voluptatem accusantium</h3>
+										<p>Doloremque laudantium totam rem aperiam Inventore veritatis et quasi architecto beatae vitae.</p>
+									</li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<h2 class="section-title">Weather analyssis</h2>
+								<ul class="arrow-list">
+									<li><a href="#">Accusantium doloremque laudantium rem aperiam</a></li>
+									<li><a href="#">Eaque ipsa quae ab illo inventore veritatis quasi</a></li>
+									<li><a href="#">Architecto beatae vitae dicta sunt explicabo</a></li>
+									<li><a href="#">Nemo enim ipsam voluptatem quia voluptas</a></li>
+									<li><a href="#">Aspernatur aut odit aut fugit, sed quia consequuntur</a></li>
+									<li><a href="#">Magni dolores eos qui ratione voluptatem sequi</a></li>
+									<li><a href="#">Neque porro quisquam est qui dolorem ipsum quia</a></li>
+								</ul>
+							</div>
+							<div class="col-md-4">
+								<h2 class="section-title">Awesome Photos</h2>
+								<div class="photo-grid">
+									<a href="#"><img src="images/thumb-1.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-2.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-3.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-4.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-5.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-6.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-7.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-8.jpg" alt="#"></a>
+									<a href="#"><img src="images/thumb-9.jpg" alt="#"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main> <!-- .main-content -->
+
+			<footer class="site-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8">
+							<form action="#" class="subscribe-form">
+								<input type="text" placeholder="Enter your email to subscribe...">
+								<input type="submit" value="Subscribe">
+							</form>
+						</div>
+						<div class="col-md-3 col-md-offset-1">
+							<div class="social-links">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-google-plus"></i></a>
+								<a href="#"><i class="fa fa-pinterest"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<p class="colophon">Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+				</div>
+			</footer> <!-- .site-footer -->
+		</div>
+
+		<!-- <h3><div class="today" id="today"></div></h3>
+						
+							
+								<h4><div class={{weekday}} id="0"></div></h4> *ngFor="let day of City Forecast"
+							
+							<div class="forecast-content" id="0">
+								<div class="degree" id="0">
+									<!-- <div class="numHigh" id="0">{{day.temp_Max}}</div> -->
+									<!-- <small><div class="numLow" id="0">{{day.temp_Min}}</div></small>
+									<div class="forecast-icon" id="0">
+										
+									</div>
+								</div>
+								<span><div class="rain" id="0">{{day.Rain}}</div><img src="images/icon-umberella.png"></span>
+								<span><div class="wind" id="0">{{day.Wind}}</div><img src="images/icon-wind.png"></span>
+								<span><div class="direct" id="0">{{day.Direct}}</div><img src="images/icon-compass.png"></span> -->
+								<!-- <span><div class="humid" id="0">{{day.Humidity}}</div></span>
+								<span><div class="UV" id="0">{{day.UV}}</div></span> -->
+							<!-- </div> --> 
+
+					<!-- <img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'> <br>  --> -->
+
+
+		<script src="./moment.js"></script>
+		<script type="text/javascript" src="./app.js"></script>
+	
+	
+	</body>
+		
+</html>
