@@ -5,14 +5,14 @@ $(document).ready (function () {
     var key = "af2763d6de673b2f09f9cfea0b035d97";
     var text = city; 
     var today = moment().format("Do MMMM YYYY, h:mm");
-    var urlNow = "api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}";
-    var urlFore = "api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}";
-    var urlUv = "api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}";
-    
+    var urlNow = "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}";
+    var urlFore = "https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}";
+    var urlUv = "https://api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}";
+
     $.when(
         $("#cityBtn").click(function(event) {
             event.preventDefault()},
-
+    
     $.getJSON (function () {
         $.ajax({
             q : city,
@@ -22,20 +22,9 @@ $(document).ready (function () {
             lon: forecastData.city.coord.lon,
         },
 
-    $.when (
-        $.ajax ({url: urlNow,
-            success: function(nowData) {
-            console.log (nowData);
-                $.ajax ({url: urlFore, 
-                    success: function (foreData){
-                    console.log (foreData);
-                        $.ajax ({url: urlUv,
-                            success: function (uvData) {
-                            console.log (uvData);}
-                        })
-                    }
-                })
-            }})),
+    $.ajax ({url: urlNow, success: function(nowData) {console.log (nowData);
+    $.ajax ({url: urlFore, success: function (foreData) {console.log (foreData);
+    $.ajax ({url: urlUv, success: function (uvData) {console.log (uvData),
                         
         
     $.then (function () {
@@ -99,5 +88,5 @@ $(document).ready (function () {
     $("#uv").html(uv);
 
     uvFormat();
-})}))})))
-})
+        })})}})}})}}))})))
+    })
