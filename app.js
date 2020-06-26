@@ -1,12 +1,13 @@
-script="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
- 
- $(document).ready (function () {
+$(document).ready (function () {
     
     var city = $('#city-name').val ();
     var itemKey = today;
     var key = "af2763d6de673b2f09f9cfea0b035d97";
-    var text = city;
+    var text = city; 
     var today = moment().format("Do MMMM YYYY, h:mm");
+    var urlNow = "api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}";
+    var urlFore = "api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}";
+    var urlUv = "api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}";
     
     $.when(
         $("#cityBtn").click(function(event) {
@@ -21,33 +22,38 @@ script="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
             lon: forecastData.city.coord.lon,
         },
 
-    $.when ($.ajax("xhttp://api.openweathermap.org/data/2.5/weather?q={city}&appid={appid}"), 
-    $.ajax("xhttp://api.openweathermap.org/data/2.5/forecast?q={city}&appid={appid}"),
-    $.ajax("xhttp://api.openweathermap.org/data/2.5/uvi?appid=${appid}&lat=${lat}&lon=${lon}"))
-
-    .then(function (resp1, resp2, resp3){
-
-    console.log (resp1);
-    console.log (resp2);
-    console.log (resp3);
-    },
+    $.when (
+        $.ajax ({url: urlNow,
+            success: function(nowData) {
+            console.log (nowData);
+                $.ajax ({url: urlFore, 
+                    success: function (foreData){
+                    console.log (foreData);
+                        $.ajax ({url: urlUv,
+                            success: function (uvData) {
+                            console.log (uvData);}
+                        })
+                    }
+                })
+            }})),
+                        
         
     $.then (function () {
         $("#your-city").append(city);
-            localStorage.setItem(itemKey, text, resp1, resp2, resp3)
+            localStorage.setItem(itemKey, text, nowData, foreData, uvData)
         },
             
     forecastNow(),
 
     function nowFormat () {
-        wf1 = "",
-        wf1 += "<h2>" + resp1.city.name + "</h2>";                     
-        wf1 += "<p>" // 
-        wf1 += "<b> Today "  + dayName +  "</b>: "
-        wf1 += (val.main.temp).toFixed(0); + "&degC" // Temperature
-        wf1 += "<span> " + val.weather[0].description + "</span>"; // Description
-        wf1 += "<img src='xhttp://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
-        wf1 += "</p>" // Closing paragraph tag'
+        WeatherNow = "",
+        WeatherNow += "<h2>" + nowData.city.name + "</h2>";                     
+        WeatherNow += "<p>" // 
+        WeatherNow += "<b> Today "  + dayName +  "</b>: "
+        WeatherNow += (val.main.temp).toFixed(0); + "&degC" // Temperature
+        WeatherNow += "<span> " + val.weather[0].description + "</span>"; // Description
+        WeatherNow += "<img src='xhttp://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
+        WeatherNow += "</p>" // Closing paragraph tag'
         },
 
     nowFormat(),   
@@ -55,43 +61,43 @@ script="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     function forecastFormat(){ 
         const timesToDisplay = [0, 8, 16, 24, 32];
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        var resp2 = resp2.data; 
+        var foreData = foreData.data; 
 
-        $.each (resp2.list, function (index, val) {
+        $.each (foreData.list, function (index, val) {
             if (timesToDisplay.includes(index)) {
-                var d = new Date(resp2.list[index].dt * 1000);
+                var d = new Date(foreData.list[index].dt * 1000);
                 var dayName = days[d.getDay()];
                 console.log(dayName); 
         
-        var wf2 = '';
-            wf2 += "<h2>" + resp2.city.name + "Future Forecast </h2>"; 
-            wf2 += "<p>" // Opening paragraph tag
-            wf2 += "<b> "  + dayName +  "</b>: " // Day
-            wf2 += (val.main.temp).toFixed(0); + "&degC" // Temperature
-            wf2 += "<span> " + val.weather[0].description + "</span>"; // Description
-            wf2 += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
-            wf2 += "</p>" // Closing paragraph tag'
+        var Forecast = '';
+            Forecast += "<h2>" + foreData.city.name + "Future Forecast </h2>"; 
+            Forecast += "<p>" // Opening paragraph tag
+            Forecast += "<b> "  + dayName +  "</b>: " // Day
+            Forecast += (val.main.temp).toFixed(0); + "&degC" // Temperature
+            Forecast += "<span> " + val.weather[0].description + "</span>"; // Description
+            Forecast += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
+            Forecast += "</p>" // Closing paragraph tag'
             
             };
 
     forecastFormat();
 
         function uvFormat(){
-        var resp3 = resp3.value
-        wf3 = '';
-        wf3 += "<div>";
-        wf3 += "<h2> Today's UV Forecast </h2>";
-        wf3 += "<p>"; 
-        wf3 += "<b> UV Index"  + uvI +  "</b>: ";
-        wf3 += "</p>"
-        wf3 += "</div>"
+        var uvData = uvData.value
+        uv = '';
+        uv += "<div>";
+        uv += "<h2> Today's UV Forecast </h2>";
+        uv += "<p>"; 
+        uv += "<b> UV Index"  + uvI +  "</b>: ";
+        uv += "</p>"
+        uv += "</div>"
 
     };
 
-    $("#wf1").html(wf1);
-    $("#wf2").html(wf2);
-    $("#wf3").html(wf3);
+    $("#WeatherNow").html(WeatherNow);
+    $("#Forecast").html(Forecast);
+    $("#uv").html(uv);
 
     uvFormat();
-        })})))})))
+})}))})))
 })
