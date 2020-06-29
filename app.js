@@ -3,16 +3,52 @@ $(document).ready (function () {
     var today = moment().format("Do MMMM YYYY, h:mm");
 
     $("#cityBtn").click(function(event) {
-        var city = $('#city-name').val ();
         event.preventDefault();
-        $("#your-city").append(city);
         $("#your-city").empty();
         $("#city-name").empty();
-        
+        var city = $('#city-name').val ();
+        console.log(city);
+        },
+
+        $("#your-city").append(city);
+
+        function storeList(){        
         var itemKey = today;
         var text = city;   
         const cities = localStorage.setItem(itemKey, text);
+        console.log(cities);
 
+        $("#search-history").on("click", "item", function () {
+            city = $(this).text().replace("x", "")
+            console.log($(this).text())
+        },
+        cities.push(city);
+            $(".search").val("");
+                storeList();
+                renderList();
+                weather();
+        
+        function renderList() {
+        $("#cityBtn").on("click", function(event) {
+            cities.push(city);
+                for (var i = 0; i < cities.length; i++) {
+                    var a = "<p>" + ("city", cities[i]) + (text(cities[i])) + "</p><br>";
+                        $("#search-history").append( a )
+                        a += $();
+                }    
+                    if (localStorage.getItem("cities") != null) {
+                        var historyTmp = localStorage.getItem("cities");
+                        var oldhistoryarray = historyTmp.split('|');
+                        $('#search-history').empty();
+                    }
+                        for(var i =0; i<oldhistoryarray.length; i++) {
+                            $('#search-history').append('<p>'+oldhistoryarray[i]+'</p>');
+                        }
+                    }
+        )}
+                    renderList(),
+            
+function weather(){
     $.ajax ({
         method: 'GET',
         dataType: 'jsonp',
@@ -30,8 +66,9 @@ $(document).ready (function () {
                 if(deg>67.5) return 'Easterly';
                 if(deg>22.5){return 'North Easterly';}
                 return 'Northerly';
+            }
 
-            }        
+                
                 function weatherNow () {
                     weatherNow = "",                   
                     weatherNow += "<p>"; // 
@@ -42,11 +79,13 @@ $(document).ready (function () {
                     weatherNow += "<p> <span><em> " + nowData.weather[0].description + " </em></span></p><br>"; 
                     weatherNow += "<img src='https://openweathermap.org/img/w/" + nowData.weather[0].icon + ".png'><br>"; 
                     weatherNow += "</p>";
-                        $("#weatherNow").html(weatherNow);
                 }
-                weatherNow();
-            
-        $.ajax ({
+                    $("#weatherNow").html(weatherNow);
+                },
+                    weatherNow() {
+
+        function uvNow() {
+            $.ajax ({
             method: 'GET',
             url: "https://api.openweathermap.org/data/2.5/uvi?appid=af2763d6de673b2f09f9cfea0b035d97&lat=" + nowData.coord.lat + "&lon=" + nowData.coord.lon,
             success: function (uvData) {
@@ -59,18 +98,17 @@ $(document).ready (function () {
                     if (uv = [8-11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
                     if (uv >11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
                 };
-
-                // 
-
+                uvColor();
+            }
                 function uvFormat(){
                     uv = "";
                     uv += "<p>"; 
                     uv += "<b><h3> UV Rating: </h3> " + (uvColor(uvData.value)) +  "</b><br>";
                     uv += "</p>";
                 
-                    $("#uv").html(uv);
-                            }
-                            uvFormat();          
+                    $("#uv").html(uv),
+                            },
+                            uvFormat();
 
     $.ajax ({      
         method: 'GET',
@@ -98,41 +136,16 @@ $(document).ready (function () {
                 wf += "</p><br>" // Closing paragraph tag
                 }
             $("#forecast").html(wf);
-            });
+            })
+        }}
+    )},
+        
+        uvNow()
+        
+    },
 
-
-    function renderHistory() {
-    $("#cityBtn").on("click", function(event) {
-        $("#your-city").empty();
-        $("#city-name").empty();
-        var city = $("#city-name").val().trim();
-                    cities.push(city);
-                for (var i = 0; i < cities.length; i++) {
-                    var a = $("<p>");
-                        a.attr("data-name", cities[i]);
-                        a.text(cities[i]);
-                            $("#search-history").append( a )
-                        a += $("</p><br>");
-                            
-                        if (localStorage.getItem("history") != null)
-                        {
-                            var historyTmp = localStorage.getItem("history");
-                            var oldhistoryarray = historyTmp.split('|');
-                            $('#lastResults').empty();
-                            for(var i =0; i<oldhistoryarray.length; i++)
-                            {
-                                $('#search-history').append('<p>'+oldhistoryarray[i]+'</p>');
-                            }
-                            renderHistory();
-                                            }
-                                        }
-                                    })
-                                }
-                            }
-                        })
-                    }
-                })
-            }
-        })
-    })
-})            
+                        
+            
+        weather()
+            )}
+        
