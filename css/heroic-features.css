@@ -1,0 +1,20 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/templates/heroic-features)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+  font-family: "Roboto", "Open Sans", sans-serif;
+}
+
+p {
+  color: rgb(3, 3, 19);
+}
+
+h1, h2, h3, h4, h5 {
+  color: lightseagreen;
+  font-weight: bold;
+}
+
+
