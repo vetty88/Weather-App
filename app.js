@@ -1,60 +1,21 @@
 $(document).ready (function () {
-    
-    var today = moment().format("Do MMMM YYYY, h:mm");
-
-    $("#cityBtn").click(function(event) {
-        event.preventDefault();
-        $("#your-city").empty();
-        $("#city-name").empty();
-        var city = $('#city-name').val ();
-        console.log(city);
-        },
-
-        $("#your-city").append(city);
-
-        function storeList(){        
-        var itemKey = today;
-        var text = city;   
-        const cities = localStorage.setItem(itemKey, text);
-        console.log(cities);
-
-        $("#search-history").on("click", "item", function () {
-            city = $(this).text().replace("x", "")
-            console.log($(this).text())
-        },
-        cities.push(city);
-            $(".search").val("");
-                storeList();
-                renderList();
-                weather();
+var today = moment().format("Do MMMM YYYY, h:mm");
+},
+// x WHEN I search for a city
+$("#cityBtn").click(function(event) {
+    event.preventDefault();
+    var city = $('#city-name').val ();
+    console.log(city);
         
-        function renderList() {
-        $("#cityBtn").on("click", function(event) {
-            cities.push(city);
-                for (var i = 0; i < cities.length; i++) {
-                    var a = "<p>" + ("city", cities[i]) + (text(cities[i])) + "</p><br>";
-                        $("#search-history").append( a )
-                        a += $();
-                }    
-                    if (localStorage.getItem("cities") != null) {
-                        var historyTmp = localStorage.getItem("cities");
-                        var oldhistoryarray = historyTmp.split('|');
-                        $('#search-history').empty();
-                    }
-                        for(var i =0; i<oldhistoryarray.length; i++) {
-                            $('#search-history').append('<p>'+oldhistoryarray[i]+'</p>');
-                        }
-                    }
-        )}
-                    renderList(),
-            
-function weather(){
-    $.ajax ({
+},
+  function weather() {
+      var city = $("#your-city").append(city);
+    $.ajax (), {
         method: 'GET',
         dataType: 'jsonp',
         url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
-        success: function(nowData) {
-            console.log (nowData)
+        success: function(nowData)
+            {console.log (nowData)
 
             function  toTextualDescription(deg){
                 if (deg>337.5) return 'Northerly';
@@ -82,14 +43,15 @@ function weather(){
                 }
                     $("#weatherNow").html(weatherNow);
                 },
-                    weatherNow() {
+                    weatherNow(){ 
 
         function uvNow() {
             $.ajax ({
             method: 'GET',
             url: "https://api.openweathermap.org/data/2.5/uvi?appid=af2763d6de673b2f09f9cfea0b035d97&lat=" + nowData.coord.lat + "&lon=" + nowData.coord.lon,
             success: function (uvData) {
-                console.log (uvData)
+                console.log (uvData)}
+            },
 
                 function uvColor(){
                     if(uv = [0-3]) return  '<p style= "background-color: #669966;">Low</p>';
@@ -97,25 +59,27 @@ function weather(){
                     if (uv = [6-8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
                     if (uv = [8-11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
                     if (uv >11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
-                };
-                uvColor();
-            }
-                function uvFormat(){
+                },
+                uvColor(),
+
+                function uvFormat() {
                     uv = "";
                     uv += "<p>"; 
                     uv += "<b><h3> UV Rating: </h3> " + (uvColor(uvData.value)) +  "</b><br>";
                     uv += "</p>";
                 
-                    $("#uv").html(uv),
+                    $("#uv").html(uv)
                             },
-                            uvFormat();
+                            uvFormat(),
+                            uvNow(),
 
     $.ajax ({      
         method: 'GET',
         dataType: 'jsonp',
         url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
-        success: function (foreData) {
-            
+    },
+        success, function (foreData) {
+    
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             const timesToDisplay = [0, 8, 16, 24, 32];
             let d;
@@ -136,16 +100,77 @@ function weather(){
                 wf += "</p><br>" // Closing paragraph tag
                 }
             $("#forecast").html(wf);
-            })
-        }}
-    )},
-        
-        uvNow()
-        
-    },
+            },         
+                       
+        weather(),
 
-                        
+
+function storeList(){        
+    var itemKey = today;
+    var text = city;   
+    const cities = localStorage.setItem(itemKey, text);
+    console.log(cities);
+    storeList();
+
+   
+    },
+           
+            weather(),
+
+                            function historyUpdate (currentCity) {
+                                var historyArray = [];
+                                
+                              if( currentCity !== "" ){
+                                // Add current city to history array
+                                historyArray.push(currentCity);
+                              }
+                            
+                                // If history array exceeds 10-item limit, remove the first (oldest) city
+                                if( historyArray.length > 10 ){
+                                  historyArray.shift();
+                                
+                                
+                                // Empty current display of history array
+                                $("#search-history").empty();
+                                }
+                                // Display each item of current history array
+                                historyArray.forEach(function(city) {
+                                  $("#search-history").prepend($(`<div class='historyCity'>${city}</div>`))
+                            
+                            // Handle the event for loading data for a new city
+                            var handleCitySearch = function(event) {
+                              // If this was triggered by an event rather than page load,
+                              if( event ) {
+                                event.preventDefault();
+                                // Grab input for current city search depending on whether it was a submit event or click event
+                                if( event.type === "submit" ){
+                                  var currentCitySearch = event.target.children[0].value;
+                                } else if ( event.type === "click" ){
+                                  var currentCitySearch = event.target.innerHTML;
+                                }
+                                
+                              // Else if this is triggered by page load,
+                              } else {
+                                // Load last searched city if it exists, otherwise load Sydney
+                                if( localStorage.getItem("currentCity") ){
+                                  var currentCitySearch = localStorage.getItem("currentCity");
+                                } else {
+                                  var currentCitySearch = "Sydney";
+                                }
             
-        weather()
+// When the search form is submitted, run function for displaying data for searched city
+$("#cityBtn").on("submit", handleCitySearch);
+
+// When a city from the history list is clicked, run function for displaying data for that city
+$("#historyDiv").on("click", ".historyCity", handleCitySearch);
+
+// On page load, load initial current city
+handleCitySearch();
+                            }}
+                        })
+                    })
+                })
             )}
-        
+                    }}
+                })
+)
