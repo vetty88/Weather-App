@@ -1,89 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-  <title>City Weather Forecast</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>City Weather Forecast</title>
 
    <!-- Bootstrap core CSS -->
    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700%7C" rel="stylesheet"  type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700%7C" rel="stylesheet" type="text/css">
 
 
-  <!-- Loading main css file -->
-  <link href= "./css/heroic-features.css" rel="stylesheet"  type="text/css">
-  <link href= "./style.css" rel="stylesheet"  type="text/css">
- 
+   <!-- Loading main css file -->
+   <link href="./css/heroic-features.css" rel="stylesheet" type="text/css">
+   <link href="./style.css" rel="stylesheet" type="text/css">
 
-<!-- loading jquery script -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./moment.js"></script>
-<script src="./app.js"> type="text/javascript" </script>
+
+   <!-- loading jquery script -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="./moment.js"></script>
+   <script src="./app.js" type = "text/javascript"></script>
 </head>
 
 <body>
 
-  <!-- Page Content -->
-  <div class="container">
+   <!-- Page Content -->
+   <div class="container">
 
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <h4 id = "today"><em></em></h4>
-      <h1 class="display-3">A Warm (or cool!) Welcome!</h1>
-      <p class="lead">Whether here for work or pleasure - find your city weather!</p>
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+         <h4 id="today"><em></em></h4>
+         <h1 class="display-3">A Warm (or cool!) Welcome!</h1>
+         <p class="lead">Whether here for work or pleasure - find your city weather!</p>
 
-      <form class="form-inline md-form mr-auto mb-4">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="city-search">
-        <button class="btn lg aqua-gradient btn-rounded" type="submit" id="cityBtn">Search</button>
-      </form>
-        <h1><div class="header" id="your-city"> </div></h1>
-  </header>
-    <!-- Page Features -->
-    <div class="row text-center">
+         <form class="form-inline md-form mr-auto mb-4">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id="city-search">
+            <button class="btn lg aqua-gradient btn-rounded" type="submit" id="cityBtn">Search</button>
+         </form>
+         <h1>
+            <div class="header" id="your-city"> </div>
+         </h1>
+      </header>
+      <!-- Page Features -->
+      <div class="row text-center">
 
-        <div class="col-lg-8 col-md-8">
+         <div class="col-lg-8 col-md-8">
             <div class="card h-80">
-                <div class="card-body">
-                    <h2 class="card-title">Weather Now</h2>
-                        <h1 class="card-text" id = weatherNow></h1>
-                </div>		
+               <div class="card-body">
+                  <h2 class="card-title">Weather Now</h2>
+                  <h1 class="card-text" id=weatherNow></h1>
+               </div>
             </div>
-            <h2 class="card-footer" id = "uv"></h2>
+            <h2 class="card-footer" id="uv"></h2>
             <div class="card-body">
-              <h3 class="card-title">Search History</h3>
-                  <h1 class="card-text" id = search-history></h1>
-                </div>
-          </div>
-            <!-- body column 1 of 2 -->
-        
-      <div class="col-lg-4 col-md-4 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title">Weekly Forecast</h4>
-            <h3 class="card-text" id = forecast></h3>
-            </div>		
-        </div>
-    </div>
-        <!-- body column 2 of 2 -->
-    </div>
-    <!-- row -->
+               <h3 class="card-title">Search History</h3>
+               <h1 class="card-text" id=search-history></h1>
+            </div>
+         </div>
+         <!-- body column 1 of 2 -->
 
-  </div>
-  <!-- /.container -->
+         <div class="col-lg-4 col-md-4 mb-4">
+            <div class="card h-100">
+               <div class="card-body">
+                  <h4 class="card-title">Weekly Forecast</h4>
+                  <h3 class="card-text" id=forecast></h3>
+               </div>
+            </div>
+         </div>
+         <!-- body column 2 of 2 -->
+      </div>
+      <!-- row -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+   </div>
+   <!-- /.container -->
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
+   <!-- Footer -->
+   <footer class="py-5 bg-dark">
+      <div class="container">
+         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      </div>
+      <!-- /.container -->
+   </footer>
+
+   <!-- Bootstrap core JavaScript -->
+   <script src="vendor/jquery/jquery.min.js"></script>
+   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 
 </body>
