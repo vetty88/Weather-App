@@ -16,6 +16,16 @@ $(document).ready(function() {
         if (deg <= 22.5) return 'No Wind';
     };
 
+    function uvColor(uv) {
+        if (uv = [0 - 3]) return '<p style= "background-color: #669966;">Low</p>';
+        if (uv = [3 - 6]) return '<p.style= "background-color: #F9A825;"> Moderate </p>';
+        if (uv = [6 - 8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
+        if (uv = [8 - 11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
+        if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
+    };
+
+    
+
     function  saveToLocalStorage(name){
         var data  = [];
       data.push(name);
@@ -52,6 +62,13 @@ $(document).ready(function() {
                     url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
                     success: function(nowData) {
                         console.log(nowData);
+                        var nowData = nowData;
+
+                        $.ajax({
+                            method: 'GET',
+                            url: "https://api.openweathermap.org/data/2.5/uvi?appid=af2763d6de673b2f09f9cfea0b035d97&lat=" + nowData.coord.lat + "&lon=" + nowData.coord.lon,
+                            success: function(uvData) {
+                                console.log(uvData)
 
 
                                 var weatherNow = "";
@@ -65,42 +82,23 @@ $(document).ready(function() {
                                     weatherNow += "</p>";
                                 console.log(weatherNow);
                                  $("#weatherNow").html(weatherNow);
-                            }
-                        });
 
+                                var uvF = "";
+                                    uvF += "<p>";
+                                    uvF += "<b><h3> UV Rating: </h3> " + uvColor(uvData.value) + "</b><br>";
+                                    uvF += "</p>";
+                                
+                                    $("#uv").html(uvF);
+                                 }}
+                        );
+                        }
+                    
+                                
                         });
                          });
+                        });
 
                         
-
-                            // function uvNow() {
-                            //     $.ajax({
-                            //             method: 'GET',
-                            //             url: "https://api.openweathermap.org/data/2.5/uvi?appid=af2763d6de673b2f09f9cfea0b035d97&lat=" + nowData.coord.lat + "&lon=" + nowData.coord.lon,
-                            //             success: function(uvData) {
-                            //                 console.log(uvData)
-                            //             }
-                            //         },
-                            //         function uvColor() {
-                            //             if (uv = [0 - 3]) return '<p style= "background-color: #669966;">Low</p>';
-                            //             if (uv = [3 - 6]) return '<p.style= "background-color: #F9A825;"> Moderate </p>';
-                            //             if (uv = [6 - 8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
-                            //             if (uv = [8 - 11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
-                            //             if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
-                            //         },
-                            //         uvColor(),
-
-                            //         function uvFormat() {
-                            //             uvF = "";
-                            //             uvF += "<p>";
-                            //             uvF += "<b><h3> UV Rating: </h3> " + '(uvColor(uvData.value))' + "</b><br>";
-                            //             uvF += "</p>";
-                            //         },
-                            //         uvFormat(),
-                            //         $("#uv").html(uvF),
-                            //         uvNow(),
-                            //     )}
-
                             //         function forecast() {
 
                             //             $.ajax({
@@ -212,4 +210,4 @@ $(document).ready(function() {
     // $("#historyDiv").on("click", ".historyCity", handleCitySearch);
 
     // // On page load, load initial current city
-    // handleCitySearch();
+    // handleCitySearch()
