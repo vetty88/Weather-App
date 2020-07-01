@@ -24,7 +24,6 @@ $(document).ready(function() {
         if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
     };
 
-    
 
     function  saveToLocalStorage(name){
         var data  = [];
@@ -70,6 +69,14 @@ $(document).ready(function() {
                             success: function(uvData) {
                                 console.log(uvData)
 
+                                $.ajax({
+
+                                    method: 'GET',
+                                    dataType: 'jsonp',
+                                    url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
+                                    success: function(foreData) {
+                                        console.log(foreData)
+
 
                                 var weatherNow = "";
                                     weatherNow += "<p>"; // 
@@ -89,50 +96,42 @@ $(document).ready(function() {
                                     uvF += "</p>";
                                 
                                     $("#uv").html(uvF);
-                                 }}
-                        );
-                        }
-                    
-                                
-                        });
-                         });
-                        });
 
+                                    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                                        const timesToDisplay = [0, 8, 16, 24, 32];
                         
-                            //         function forecast() {
+                                        let d;
+                                        let dayName;
+                                        
+                                        $.each(foreData.list, function(index, val) {
+                                                if (timesToDisplay.includes(index))
+                                                    d = new Date(foreData.list[index].dt * 1000);
+                                                dayName = days[d.getDay()];
+                                
+                                                       
+                                    var wf = "";
+                                    wf += "<h2>" + city + "</h2>"; 
+                                    wf += "<p>";
+                                    wf += dayName + "<br>";
+                                    wf += "<p> HI: " + (val.main.temp_max).toFixed(0) + "&degC<br> </p>";
+                                    wf += "<p> LO: " + (val.main.temp_min).toFixed(0) + "&degC<br> </p>";
+                                    wf += "<p> HUMID: " + (val.main.humidity).toFixed(0) + " % <br> </p>";
+                                    wf += "<span> " + val.weather[0].description + "</span><br>";
+                                    wf += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'><br>";
+                                    wf += "</p><br>";
+                                    $("#forecast").html(wf);
+                                                             
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+                        
 
-                            //             $.ajax({
-
-                            //                 method: 'GET',
-                            //                 dataType: 'jsonp',
-                            //                 url: "https://api.openweathermap.org/data/2.5/forecast?q=" + document.getElementById("#your-city") + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
-                            //                 success: function(foreData) {
-                            //                     console.log(foreData)
-
-                            //                     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                            //                     const timesToDisplay = [0, 8, 16, 24, 32];
-
-                            //                     let d;
-                            //                     let dayName;
-                            //                     var wf = "";
-                            //                     wf += "<h2>" + foreData.city.name + "</h2>"; // City (displays once)
-
-                            //                     $.each(foreData.list, function(index, val) {
-                            //                             if (timesToDisplay.includes(index))
-                            //                                 d = new Date(foreData.list[index].dt * 1000);
-                            //                             dayName = days[d.getDay()];
-                            //                             wf += "<p>",
-                            //                                 wf += dayName + "<br>",
-                            //                                 wf += "<p> HI: " + (val.main.temp_max).toFixed(0) + "&degC<br> </p>",
-                            //                                 wf += "<p> LO: " + (val.main.temp_min).toFixed(0) + "&degC<br> </p>",
-                            //                                 wf += "<p> HUMID: " + (val.main.humidity).toFixed(0) + " % <br> </p>",
-                            //                                 wf += "<span> " + val.weather[0].description + "</span><br>",
-                            //                                 wf += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'><br>",
-                            //                                 wf += "</p><br>",
-
-                            //                                 $("#forecast").html(wf);
-                            //                         },
-                            //                         forecast(),
 
                             //                         function storeList() {
                             //                             var itemKey = today;
