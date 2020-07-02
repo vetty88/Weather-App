@@ -1,48 +1,76 @@
 $(document).ready(function() {
-
-    var today = moment().format("Do MMMM YYYY, h:mm");
-    $("#today").append(today);
-
-    
-    function toTextualDescription(deg) {
-        if (deg > 337.5) return 'Northerly';
-        if (deg > 292.5) return 'North Westerly';
-        if (deg > 247.5) return 'Westerly';
-        if (deg > 202.5) return 'South Westerly';
-        if (deg > 157.5) return 'Southerly';
-        if (deg > 122.5) return 'South Easterly';
-        if (deg > 67.5) return 'Easterly';
-        if (deg > 22.5) return 'North Easterly';
-        if (deg <= 22.5) return 'No Wind';
-    };
-
-    function uvColor(uv) {
-        if (uv = [0 - 3]) return '<p style= "background-color: #669966;">Low</p>';
-        if (uv = [3 - 6]) return '<p.style= "background-color: #F9A825;"> Moderate </p>';
-        if (uv = [6 - 8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
-        if (uv = [8 - 11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
-        if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
-    };
-
-
-    function  saveToLocalStorage(name){
-        var data  = [];
-      data.push(name);
-        //list exists
-        var savedData = localStorage.getItem("cities");
-        if(savedData !== null){
-            var parsedData = JSON.parse(savedData)
-            parsedData.push(name);
-            console.log(parsedData);
-            localStorage.setItem("cities", JSON.stringify(parsedData));
-        }else{
-            //no list available
-            localStorage.setItem("cities", JSON.stringify(data));
-        }
-    }
-
-
-    
+ // appending todays time and date to header
+ var today = moment().format("Do MMMM YYYY, h:mm");
+ $("#today").append(today);
+ 
+ // text description function for wind direction
+ function toTextualDescription(deg) {
+     if (deg > 337.5) return 'Northerly';
+     if (deg > 292.5) return 'North Westerly';
+     if (deg > 247.5) return 'Westerly';
+     if (deg > 202.5) return 'South Westerly';
+     if (deg > 157.5) return 'Southerly';
+     if (deg > 122.5) return 'South Easterly';
+     if (deg > 67.5) return 'Easterly';
+     if (deg > 22.5) return 'North Easterly';
+     if (deg <= 22.5) return 'No Wind';
+ };
+ 
+ // function to style UV color rating based on value
+ function uvColor(uv) {
+     if (uv = [0 - 3]) return '<p style= "background-color: #669966;">Low</p>';
+     if (uv = [3 - 6]) return '<p.style= "background-color: #F9A825;"> Moderate </p>';
+     if (uv = [6 - 8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
+     if (uv = [8 - 11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
+     if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
+ };
+ 
+ // function to store city names in Local storage for future retrieval
+ function saveToLocalStorage(name) {
+     var data = [];
+     data.push(name);
+     //list exists
+     var savedData = localStorage.getItem("cities");
+     if (savedData !== null) {
+         var parsedData = JSON.parse(savedData)
+         parsedData.push(name);
+         console.log(parsedData);
+         localStorage.setItem("cities", JSON.stringify(parsedData));
+     } else {
+         //no list available
+         localStorage.setItem("cities", JSON.stringify(data));
+     }
+ }
+ 
+// //  function to append each city name to the history div
+//  var cities = localStorage.getItem("cities");
+//     cities.forEach(function(name) {
+//          $("#search-history").prepend($(`<div class='historyName'>${name}</div>`))
+     
+//      if (cities.length > 10){
+//          savedData.shift(); $("#search-history").empty();
+//      } else if (event.type === "click") {
+//         city = event.target.value};
+//     });
+//  var handleCitySearch = function(event) {
+ 
+//      if (event) {
+//          event.preventDefault();
+//      } else {
+//      // Load last searched city if it exists, otherwise load Sydney
+//      if (localStorage.getItem("currentName")) {
+//          var currentCitySearch = localStorage.getItem("currentName");
+//      } else {
+//          var currentCitySearch = "Sydney";
+//      }
+ 
+//      $("#cityBtn").on("submit", handleCitySearch);
+//      $("#historyName").on("click", ".historyName", handleCitySearch);
+ 
+//      handleCitySearch()
+ 
+ 
+ function citySearch() {
 
     $("#cityBtn").click(function(event) {
         event.preventDefault()
@@ -100,6 +128,7 @@ $(document).ready(function() {
                                             const timesToDisplay = [0, 8, 16, 24, 32];
                                             let d;
                                             let dayName;
+
                                             var wf = "";
                                             wf += "<h2>" + foreData.city.name + "</h2>"; // City (displays once)
                                             $.each(foreData.list, function(index, val) {
@@ -127,88 +156,9 @@ $(document).ready(function() {
             }
         });
         // closing first ajax function (forecast now)
-    });
+    }); 
+}
     // closing click function
 
-})
-// closing document ready function
-                        
-
-
-                            //                         function storeList() {
-                            //                             var itemKey = today;
-                            //                             var text = city;
-                            //                             const cities = localStorage.setItem(itemKey, text);
-                            //                             console.log(cities);
-                            //                             storeList();
-                            //                             $("#city-search").empty()
-                                            //         })
-                                            // }
-//                                         })
-//                                     }
-//                                 )
-//                             }
-//                     }
-//                 })
-//             }
-//     )}
-// )
-
-
-//first load: chek the history and show the data
-//second:  when searched add to the array
-
-
-
-// var historyArray = [];
-
-//     historyArray.forEach(function(city) {
-//         $("#search-history").prepend($(`<div class='historyCity'>${city}</div>`))
-//     },
-//         // function historyUpdate (currentCity) {
-            
-        
-//         //     if( currentCity !== "" ){
-//         //     // Add current city to history array
-//         //     historyArray.push(currentCity);
-//         //     }
-        
-//         //     // If history array exceeds 10-item limit, remove the first (oldest) city
-//         //     if( historyArray.length > 10 ){
-//         //     historyArray.shift();
-        
-        
-//             // Empty current display of history array
-//             $("#search-history").empty()
-//             },
-//             // Display each item of current history array
-
-//         // } else if ( event.type === "click" ){
-//         // var city =  event.target.children[0].value;
-
-
-    // // Handle the event for loading data for a new city
-    // var handleCitySearch = function(event) {
-    // // If this was triggered by an event rather than page load,
-    // if( event ) {
-    // event.preventDefault();
-    // // Grab input for current city search depending on whether it was a submit event or click event
-    //
-
-    // // Else if this is triggered by page load,
-    // } else {
-    // // Load last searched city if it exists, otherwise load Sydney
-    // if( localStorage.getItem("currentCity") ){
-    // var currentCitySearch = localStorage.getItem("currentCity");
-    // } else {
-    // var currentCitySearch = "Sydney";
-    // }
-
-    // // When the search form is submitted, run function for displaying data for searched city
-    // $("#cityBtn").on("submit", handleCitySearch);
-
-    // // When a city from the history list is clicked, run function for displaying data for that city
-    // $("#historyDiv").on("click", ".historyCity", handleCitySearch);
-
-    // // On page load, load initial current city
-    // handleCitySearch()
+ }})
+// closing document ready function                       
