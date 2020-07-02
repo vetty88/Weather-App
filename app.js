@@ -67,69 +67,71 @@ $(document).ready(function() {
                             method: 'GET',
                             url: "https://api.openweathermap.org/data/2.5/uvi?appid=af2763d6de673b2f09f9cfea0b035d97&lat=" + nowData.coord.lat + "&lon=" + nowData.coord.lon,
                             success: function(uvData) {
-                                console.log(uvData)
+                                console.log(uvData)                             
 
-                                $.ajax({
+                                        var weatherNow = "";
+                                        weatherNow += "<p>"; // 
+                                        weatherNow += "<p> Temp: " + (nowData.main.temp).toFixed(0) + "&degC</p><br>";
+                                        weatherNow += "<p> Wind: " + (nowData.wind.speed).toFixed(0) + " KM/hr <br>";
+                                        weatherNow += "<p> Humidity: " + (nowData.main.humidity).toFixed(0) + "%</p><br>";
+                                        weatherNow += "<p>" + (toTextualDescription(nowData.wind.deg)) + "</p><br>";
+                                        weatherNow += "<p> <span><em> " + nowData.weather[0].description + " </em></span></p><br>";
+                                        weatherNow += "<img src='https://openweathermap.org/img/w/" + nowData.weather[0].icon + ".png'><br>";
+                                        weatherNow += "</p>";
+                                    console.log(weatherNow);
+                                     $("#weatherNow").html(weatherNow);
 
-                                    method: 'GET',
-                                    dataType: 'jsonp',
-                                    url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
-                                    success: function(foreData) {
-                                        console.log(foreData)
+                                     var uvF = "";
+                                     uvF += "<p>";
+                                     uvF += "<b><h3> UV Rating: </h3> " + uvColor(uvData.value) + "</b><br>";
+                                     uvF += "</p>";
+                                 
+                                     $("#uv").html(uvF);
 
+                                     $.ajax({
 
-                                var weatherNow = "";
-                                    weatherNow += "<p>"; // 
-                                    weatherNow += "<p> Temp: " + (nowData.main.temp).toFixed(0) + "&degC</p><br>";
-                                    weatherNow += "<p> Wind: " + (nowData.wind.speed).toFixed(0) + " KM/hr <br>";
-                                    weatherNow += "<p> Humidity: " + (nowData.main.humidity).toFixed(0) + "%</p><br>";
-                                    weatherNow += "<p>" + (toTextualDescription(nowData.wind.deg)) + "</p><br>";
-                                    weatherNow += "<p> <span><em> " + nowData.weather[0].description + " </em></span></p><br>";
-                                    weatherNow += "<img src='https://openweathermap.org/img/w/" + nowData.weather[0].icon + ".png'><br>";
-                                    weatherNow += "</p>";
-                                console.log(weatherNow);
-                                 $("#weatherNow").html(weatherNow);
+                                        method: 'GET',
+                                        dataType: 'jsonp',
+                                        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
+                                        success: function(foreData) {
+                                            console.log(foreData);
 
-                                var uvF = "";
-                                    uvF += "<p>";
-                                    uvF += "<b><h3> UV Rating: </h3> " + uvColor(uvData.value) + "</b><br>";
-                                    uvF += "</p>";
-                                
-                                    $("#uv").html(uvF);
-
-                                    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                                        const timesToDisplay = [0, 8, 16, 24, 32];
-                        
-                                        let d;
-                                        let dayName;
-                                        
-                                        $.each(foreData.list, function(index, val) {
-                                                if (timesToDisplay.includes(index))
-                                                    d = new Date(foreData.list[index].dt * 1000);
+                                            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                                            const timesToDisplay = [0, 8, 16, 24, 32];
+                                            let d;
+                                            let dayName;
+                                            var wf = "";
+                                            wf += "<h2>" + foreData.city.name + "</h2>"; // City (displays once)
+                                            $.each(foreData.list, function(index, val) {
+                                              if(timesToDisplay.includes(index)){
+                                                d = new Date(foreData.list[index].dt * 1000);
                                                 dayName = days[d.getDay()];
-                                
-                                                       
-                                    var wf = "";
-                                    wf += "<h2>" + city + "</h2>"; 
-                                    wf += "<p>";
-                                    wf += dayName + "<br>";
-                                    wf += "<p> HI: " + (val.main.temp_max).toFixed(0) + "&degC<br> </p>";
-                                    wf += "<p> LO: " + (val.main.temp_min).toFixed(0) + "&degC<br> </p>";
-                                    wf += "<p> HUMID: " + (val.main.humidity).toFixed(0) + " % <br> </p>";
-                                    wf += "<span> " + val.weather[0].description + "</span><br>";
-                                    wf += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'><br>";
-                                    wf += "</p><br>";
+                                                wf += "<p>" // Opening paragraph tag
+                                                wf += "<b>" + dayName + "</b>: " // Day
+                                                wf += val.main.temp.toFixed(0) + "&degC" // Temperature
+                                                wf += "<span> " + val.weather[0].description + "</span>"; // Description
+                                                wf += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
+                                                wf += "</p>" // Closing paragraph tag
+                                              }
+                                            });
                                     $("#forecast").html(wf);
+                                    
+                
                                                              
-                                        });
-                                    }
-                                });
-                            }
-                        });
+                                      }
+                                    });
+                                    // closing third ajax function (weekly Forecast)
                     }
                 });
-            });
+                // closing second ajax function (UV data)
+            }
         });
+        // closing first ajax function (forecast now)
+    });
+    // closing click function
+
+})
+// closing document ready function
                         
 
 
