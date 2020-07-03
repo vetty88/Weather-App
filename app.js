@@ -66,7 +66,7 @@ var handleCitySearchAlternative = function(event) {
     // first AJAX call for the weather Now data
     $.ajax({
         method: 'GET',
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=af2763d6de673b2f09f9cfea0b035d97&units=metric",
         success: function(nowData) {
             console.log(nowData);
             var nowData = nowData;
