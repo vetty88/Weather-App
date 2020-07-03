@@ -15,7 +15,7 @@ Repository created in Github Added edited code to folder, pushed to githhub repo
 Launched via Github hosting (github.io)
 
 Screenshot of Project (Google Chrome): 
-![Screenshot](,/screen.png?raw=true "Screenshot")
+![Screenshot](./Screen.PNG?raw=true "Screenshot")
 
 Web URL: Daily, Weekly Weather with UV index feature - search by city!
 https://vetty88.github.io/Weather-App/
