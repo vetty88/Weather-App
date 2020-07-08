@@ -1,7 +1,7 @@
 // text description function for wind direction
 function toTextualDescription(deg) {
     if (deg > 337.5) return 'Northerly';
-    if (deg > 292.5) return 'North Westerly';
+    if (deg > 22.5) return 'North Westerly';
     if (deg > 247.5) return 'Westerly';
     if (deg > 202.5) return 'South Westerly';
     if (deg > 157.5) return 'Southerly';
@@ -13,8 +13,8 @@ function toTextualDescription(deg) {
 
 // function to style UV color rating based on value
 function uvColor(uv) {
-    if (uv = [0 - 3]) return '<p style= "background-color: #669966;">Low</p>';
-    if (uv = [3 - 6]) return '<p.style= "background-color: #F9A825;"> Moderate </p>';
+    if (uv = [0 - 3]) return '<p style= "background-color: #6666;">Low</p>';
+    if (uv = [3 - 6]) return '<p.style= "background-color: #FA825;"> Moderate </p>';
     if (uv = [6 - 8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
     if (uv = [8 - 11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
     if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
@@ -37,19 +37,23 @@ if (!citiesArray) {
 
 // set city var from last history item
 var cityStart = function() {
-    city = citiesArray[9];
+    city = citiesArray[citiesArray.length-1];
     handleCitySearchAlternative();
 }
 
 // set city var from search box
 var citySearch = function() {
     city = $('#city-search').val();
+     //save city name to local storage
+     saveToLocalStorage(city)
     handleCitySearchAlternative();
 }
 
 // set city var from clicked history item
 var cityClick = function() {
     city = event.target.id;
+    //save city name to local storage
+    saveToLocalStorage(city)
     handleCitySearchAlternative();
 }
 
@@ -59,9 +63,6 @@ var handleCitySearchAlternative = function(event) {
 
     //push city name to your-city
     $("#your-city").text(city);
-
-    //save city name to local storage
-    saveToLocalStorage(city)
 
     // first AJAX call for the weather Now data
     $.ajax({
