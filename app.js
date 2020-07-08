@@ -93,8 +93,9 @@ var handleCitySearchAlternative = function(event) {
                     // Formatting and adding to HTML the UV data
                     var uvF = "";
                     uvF += "<p>";
-                    uvF += "<b><h3> UV Rating: </h3> " + uvColor(uvData.value) + "</b><br>";
+                    uvF += "<b><h3> UV Rating: </h3>" + uvColor(uvData.value) + "</b><br>";
                     uvF += "</p>";
+                    console.log(uvF);
 
                     $("#uv").html(uvF);
 
