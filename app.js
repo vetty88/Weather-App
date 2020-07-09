@@ -13,11 +13,11 @@ function toTextualDescription(deg) {
 
 // function to style UV color rating based on value
 function uvColor(uv) {
-    if (uv = [0 - 3]) return '<p style= "background-color: #6666;">Low</p>';
-    if (uv = [3 - 6]) return '<p.style= "background-color: #FA825;"> Moderate </p>';
-    if (uv = [6 - 8]) return '<p.style= "background-color:#EF6C00;"> High </p>';
-    if (uv = [8 - 11]) return '<p.style = "background-color: #B71C1C;"> Very High </p>';
-    if (uv > 11) return '<p.style = "background-color:#6A1B9A;"> Extreme </p>';
+    if (uv = [0 - 3]) return '<p style= "background-color:lightgreen;">Low</p>';
+    if (uv = [3 - 6]) return '<p style= "background-color:yellow;"> Moderate </p>';
+    if (uv = [6 - 8]) return '<p style= "background-color:orange;"> High </p>';
+    if (uv = [8 - 11]) return '<p style = "background-color:red;"> Very High </p>';
+    if (uv > 11) return '<p style = "background-color:maroon;"> Extreme </p>';
 };
 
 // function to store city names in Local storage for future retrieval
