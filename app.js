@@ -17,7 +17,7 @@ function uvColor(uv) {
     if (uv = [3 - 6]) return '<p style= "background-color:yellow;"> Moderate </p>';
     if (uv = [6 - 8]) return '<p style= "background-color:orange;"> High </p>';
     if (uv = [8 - 11]) return '<p style = "background-color:red;"> Very High </p>';
-    if (uv > 11) return '<p style = "background-color:maroon;"> Extreme </p>';
+    if (uv > 11) return '<p style = "background-color: maroon;"> Extreme </p>';
 };
 
 // function to store city names in Local storage for future retrieval
