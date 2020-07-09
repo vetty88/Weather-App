@@ -155,7 +155,7 @@ $(document).ready(function() {
     $("#today").append(today);
     // generating city array data
     citiesArray.forEach(function(cityName) {
-        $newdiv1 = "<div class='historyName' id=" + cityName + ">" + cityName + "</div>",
+        $newdiv1 = "<div class='historyName' data-id=" + cityName + ">" + cityName + "</div>",
             $("#searchHistory").prepend($newdiv1)
         // run function show last history item at page load
         if (!runOnce) {
