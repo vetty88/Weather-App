@@ -45,16 +45,18 @@ var cityStart = function() {
 var citySearch = function() {
     city = $('#city-search').val();
      //save city name to local storage
-     saveToLocalStorage(city)
+     
     handleCitySearchAlternative();
+    saveToLocalStorage(city)
 }
 
 // set city var from clicked history item
 var cityClick = function() {
     city = event.target.id;
     //save city name to local storage
-    saveToLocalStorage(city)
+    
     handleCitySearchAlternative();
+    saveToLocalStorage(city)
 }
 
 
@@ -155,7 +157,7 @@ $(document).ready(function() {
     $("#today").append(today);
     // generating city array data
     citiesArray.forEach(function(cityName) {
-        $newdiv1 = "<div class='historyName' data-id=" + cityName + ">" + cityName + "</div>",
+        $newdiv1 = "<div class='historyName' id=" + cityName + ">" + cityName + "</div>",
             $("#searchHistory").prepend($newdiv1)
         // run function show last history item at page load
         if (!runOnce) {
@@ -163,7 +165,7 @@ $(document).ready(function() {
             cityStart();
         }
     })
-// close doc ready func
+
 
 // initiate search from the search box click button
 $("#cityBtn").on("click", citySearch);
@@ -171,3 +173,4 @@ $("#cityBtn").on("click", citySearch);
 $("#searchHistory").on("click", cityClick);
 
 });
+// close doc ready func
