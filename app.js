@@ -47,7 +47,10 @@ var citySearch = function() {
      //save city name to local storage
      
     handleCitySearchAlternative();
-    saveToLocalStorage(city)
+    saveToLocalStorage(city);
+
+    $newdiv1 = "<div class='historyName' id=" + city + ">" + city + "</div>";
+            $("#searchHistory").prepend($newdiv1)
 }
 
 // set city var from clicked history item
@@ -57,11 +60,15 @@ var cityClick = function() {
     
     handleCitySearchAlternative();
     saveToLocalStorage(city)
-}
 
+    // generating city array data
+    citiesArray.forEach(function(cityName) {
+        $newdiv1 = "<div class='historyName' id=" + city + ">" + city + "</div>",
+            $("#searchHistory").prepend($newdiv1)
+});
 
 // search for city and AJAX events on click of city Button or history Name div
-var handleCitySearchAlternative = function(event) {
+let handleCitySearchAlternative = function(event) {
 
     //push city name to your-city
     $("#your-city").text(city);
@@ -142,13 +149,13 @@ var handleCitySearchAlternative = function(event) {
         }
     });
     // closing first ajax function (forecast now)
-};
+}
 // closing city search function
 
 // set variable so that the function that calls the last history item only runs once within the doc ready function
 if (typeof runOnce === 'undefined') {
     var runOnce = false
-}
+};
 
 // document ready function (on page load)
 $(document).ready(function() {
@@ -157,7 +164,7 @@ $(document).ready(function() {
     $("#today").append(today);
     // generating city array data
     citiesArray.forEach(function(cityName) {
-        $newdiv1 = "<div class='historyName' id=" + cityName + ">" + cityName + "</div>",
+        $newdiv1 = "<div class='historyName' id=" + cityName + ">" + cityName + "</div>";
             $("#searchHistory").prepend($newdiv1)
         // run function show last history item at page load
         if (!runOnce) {
@@ -165,12 +172,13 @@ $(document).ready(function() {
             cityStart();
         }
     })
-
-
 // initiate search from the search box click button
 $("#cityBtn").on("click", citySearch);
 // initiate search when you click on a history item
 $("#searchHistory").on("click", cityClick);
 
+
+
 });
+}
 // close doc ready func
